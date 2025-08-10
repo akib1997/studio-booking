@@ -1,4 +1,4 @@
-import { Studio } from '../../features/studio/studio.model';
+import { Studio } from '../studio/studio.model';
 
 export interface Booking extends Partial<Studio> {
   id: string;

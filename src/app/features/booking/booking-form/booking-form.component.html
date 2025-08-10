@@ -13,9 +13,10 @@
         <nz-form-label nzRequired>Time</nz-form-label>
         <nz-form-control nzErrorTip="Time is required">
           <nz-time-picker
+          nzPlaceHolder="Select Available Time"
             class="w-full"
             formControlName="time"
-            [nzDisabledHours]="disabledHours"
+            [nzDisabledHours]="disabledHours2"
             [nzDisabledMinutes]="disabledMinutes"
             [nzFormat]="'HH:mm'" />
         </nz-form-control>

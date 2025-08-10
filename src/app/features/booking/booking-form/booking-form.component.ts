@@ -49,8 +49,8 @@ export class BookingFormComponent {
   form: FormGroup = new FormGroup({
     date: new FormControl(null, { validators: [Validators.required] }),
     time: new FormControl(null, { validators: [Validators.required] }),
-    name: new FormControl('John', { validators: [Validators.required, Validators.minLength(3), Validators.maxLength(50)] }),
-    email: new FormControl('maxigi6605@cronack.com', { validators: [Validators.required, Validators.email] }),
+    name: new FormControl(null, { validators: [Validators.required, Validators.maxLength(50)] }),
+    email: new FormControl(null, { validators: [Validators.required, Validators.email] }),
   });
 
   disabledDate = (current: Date): boolean => {
@@ -72,6 +72,19 @@ export class BookingFormComponent {
     }
 
     return disabledHours;
+  };
+
+  disabledHours2 = () => {
+    const openHour = parseInt(this.modalData.data.Availability.Open.split(':')[0], 10);
+    const closeHour = parseInt(this.modalData.data.Availability.Close.split(':')[0], 10);
+
+    const hours: number[] = [];
+    for (let i = 0; i < 24; i++) {
+      if (i < openHour || i > closeHour) {
+        hours.push(i);
+      }
+    }
+    return hours;
   };
 
   // Disable minutes before current minute if date is today and hour is current hour

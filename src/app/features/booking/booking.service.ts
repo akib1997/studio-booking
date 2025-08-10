@@ -1,5 +1,5 @@
 import { Injectable, signal, effect } from '@angular/core';
-import { Booking } from '../../core/models/booking.model';
+import { Booking } from './booking.model';
 
 @Injectable({
   providedIn: 'root',

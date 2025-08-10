@@ -15,6 +15,7 @@ import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NotAvailablePipe } from '../../../core/pipes/not-available.pipe';
 import { getDistanceInKm } from '../../../core/utils/distance.utils';
 import { BookingFormComponent } from '../../booking/booking-form/booking-form.component';
+import { StudioDetailsComponent } from '../studio-details/studio-details.component';
 
 @Component({
   selector: 'app-studio-list',
@@ -89,15 +90,27 @@ export class StudioListComponent {
   }
 
   protected bookStudio(data: Studio) {
-    console.log('Booking studio:', data);
     const modal = this.nzModalService.create({
       nzTitle: 'Studio Booking',
       nzWidth: 700,
       nzStyle: { top: '50px' },
-      nzClassName: 'race-modal',
       nzContent: BookingFormComponent,
       nzMaskClosable: false,
       nzClosable: false,
+      nzData: {
+        data,
+      },
+    });
+  }
+
+    protected details(data: Studio) {
+    const modal = this.nzModalService.create({
+      nzTitle: 'Studio Booking Details',
+      nzWidth: 800,
+      nzStyle: { top: '50px' },
+      nzContent: StudioDetailsComponent,
+      nzMaskClosable: false,
+      nzClosable: true,
       nzData: {
         data,
       },

@@ -1,0 +1,84 @@
+<div class="">
+  <!-- Header -->
+  <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b pb-4 mb-6">
+    <h1 class="text-3xl font-bold">{{ studio().Name }}</h1>
+    <span class="text-lg font-semibold text-green-600"> {{ studio().PricePerHour }} {{ studio().Currency }}/hour </span>
+  </div>
+
+  <!-- Image Gallery -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+    @for (img of studio().Images; track $index) {
+      <img [src]="img" alt="{{ studio().Name }}" class="rounded-lg w-full h-28 object-cover shadow" />
+    }
+  </div>
+
+  <!-- Main Info -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- Left Info -->
+    <div class="md:col-span-2 space-y-4">
+      <p class="text-gray-700">{{ studio().Description }}</p>
+
+      <!-- Location -->
+      <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+        <h2 class="text-lg font-semibold mb-2">Location</h2>
+        <p class="text-gray-600">{{ studio().Location.Address }}</p>
+        <p class="text-gray-600">{{ studio().Location.Area }}, {{ studio().Location.City }}</p>
+      </div>
+
+      <!-- Amenities -->
+      <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+        <h2 class="text-lg font-semibold mb-2">Amenities</h2>
+        <ul class="flex flex-wrap gap-2">
+          <li *ngFor="let amenity of studio().Amenities" class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+            {{ amenity }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="space-y-4">
+      <!-- Contact -->
+      <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+        <h2 class="text-lg font-semibold mb-2">Contact</h2>
+        <p class="text-gray-600">📞 {{ studio().Contact.Phone }}</p>
+        <p class="text-gray-600">✉️ {{ studio().Contact.Email }}</p>
+      </div>
+
+      <!-- Availability -->
+      <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+        <h2 class="text-lg font-semibold mb-2">Availability</h2>
+        <p class="text-gray-600">Open: {{ studio().Availability.Open }}</p>
+        <p class="text-gray-600">Close: {{ studio().Availability.Close }}</p>
+      </div>
+
+      <!-- Rating -->
+      <div class="bg-gray-50 p-4 rounded-lg shadow-sm">
+        <h2 class="text-lg font-semibold mb-2">Rating</h2>
+        <div class="flex items-center gap-1">
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              [ngClass]="{
+                'text-yellow-400': i < studio().Rating,
+                'text-gray-300': i >= studio().Rating,
+              }"
+              fill="currentColor"
+              viewBox="0 0 20 20">
+              <path
+                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.18 3.642a1 1 0 00.95.69h3.829c.969 0 1.371 1.24.588 1.81l-3.094 2.25a1 1 0 00-.364 1.118l1.18 3.642c.3.921-.755 1.688-1.54 1.118l-3.094-2.25a1 1 0 00-1.176 0l-3.094 2.25c-.785.57-1.84-.197-1.54-1.118l1.18-3.642a1 1 0 00-.364-1.118L2.311 9.07c-.783-.57-.38-1.81.588-1.81h3.829a1 1 0 00.95-.69l1.18-3.642z" />
+            </svg>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-container *nzModalFooter>
+  <div class="button-wrap">
+    <button nz-button class="btn btn-primary-outlined" (click)="close()">Close</button>
+  </div>
+</ng-container>
