@@ -1,0 +1,33 @@
+<header class="sticky top-0 z-50">
+  <nav class="bg-white border-gray-200 px-4 lg:px-6 py-4 dark:bg-gray-800 shadow">
+    <div class="flex justify-between items-center mx-auto max-w-screen-xl">
+      <a class="flex items-center">
+        <span class="self-center text-xl capitalize font-semibold whitespace-nowrap dark:text-white">Studio booking system</span>
+      </a>
+      <div class="justify-end items-center w-full flex">
+        <ul class="flex font-medium lg:space-x-8 lg:mt-0">
+          <li>
+            <a
+              routerLink="/studios"
+              routerLinkActive="text-primary-700 dark:text-white font-bold"
+              class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+              aria-current="page"
+              >Studios</a
+            >
+          </li>
+          <li>
+            <a
+              routerLink="/bookings"
+              routerLinkActive="text-primary-700 dark:text-white font-bold"
+              class="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+              >Bookings</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="max-w-screen-xl mt-4 mx-auto px-4">
+  <router-outlet></router-outlet>
+</div>

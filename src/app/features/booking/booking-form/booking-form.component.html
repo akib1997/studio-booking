@@ -1,0 +1,57 @@
+<form nz-form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSpan]="12">
+      <nz-form-item class="!mb-4">
+        <nz-form-label nzRequired>Date</nz-form-label>
+        <nz-form-control nzErrorTip="Date is required">
+          <nz-date-picker [nzDisabledDate]="disabledDate" class="w-full" formControlName="date"></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item class="!mb-4">
+        <nz-form-label nzRequired>Time</nz-form-label>
+        <nz-form-control nzErrorTip="Time is required">
+          <nz-time-picker
+            class="w-full"
+            formControlName="time"
+            [nzDisabledHours]="disabledHours"
+            [nzDisabledMinutes]="disabledMinutes"
+            [nzFormat]="'HH:mm'" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    @if (bookedError()) {
+      <div class="my-4" nz-col [nzSpan]="24">
+        <nz-alert nzType="error" [nzMessage]="bookedError()"></nz-alert>
+      </div>
+    }
+
+    <div nz-col [nzSpan]="12">
+      <nz-form-item class="!mb-4">
+        <nz-form-label nzRequired>Name</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your Name!">
+          <input formControlName="name" nz-input placeholder="Name" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSpan]="12">
+      <nz-form-item class="!mb-4">
+        <nz-form-label nzRequired>Email</nz-form-label>
+        <nz-form-control nzErrorTip="Please input your Email!">
+          <input formControlName="email" nz-input placeholder="Email" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+</form>
+
+<ng-container *nzModalFooter>
+  <div class="button-wrap">
+    <button nz-button class="btn btn-primary-outlined" (click)="cancel(false)">Cancel</button>
+    <button nz-button class="btn btn-primary" (click)="submitForm()" [disabled]="form.invalid" [nzLoading]="isSaving()" [nzType]="'primary'">
+      Save
+    </button>
+  </div>
+</ng-container>

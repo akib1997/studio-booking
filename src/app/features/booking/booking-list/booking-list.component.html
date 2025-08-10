@@ -1,0 +1,36 @@
+<div class="flex items-center justify-between mb-4">
+  <div class="flex items-center gap-4">
+    <h1 class="text-2xl font-bold">Booking List</h1>
+  </div>
+</div>
+
+<nz-table #basicTable [nzData]="bookings()">
+  <thead>
+    <tr>
+      <th>User Name</th>
+      <th>Email</th>
+      <th>Studio Name</th>
+      <th>Type</th>
+      <th>Location</th>
+      <th>Date</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (data of basicTable.data; track data.Id) {
+      <tr>
+        <td>{{ data.name | notAvailable }}</td>
+        <td>{{ data.email | notAvailable }}</td>
+        <td>{{ data.Name | notAvailable }}</td>
+        <td>{{ data.Type | notAvailable }}</td>
+        <td>
+          {{ data.Location?.City }}<br />
+          {{ data.Location?.Area }}<br />
+          {{ data.Location?.Address }}
+        </td>
+        <td>{{ data.date | date | notAvailable }}</td>
+        <td>{{ getFormattedTime(data.time) | notAvailable }}</td>
+      </tr>
+    }
+  </tbody>
+</nz-table>

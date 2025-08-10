@@ -1,0 +1,74 @@
+<nz-spin [nzSpinning]="isLoading()">
+  <div class="flex items-center justify-between mb-4">
+    <div class="flex items-center gap-4">
+      <h1 class="text-2xl font-bold">Studio List</h1>
+
+      <svg
+        (click)="loadStudios()"
+        title="Refresh"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-4 block cursor-pointer text-gray-500 hover:text-gray-700 transition-colors">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+      </svg>
+    </div>
+    <div class="w-80">
+      <p>Search by Place</p>
+      <input
+        class="w-full"
+        placeholder="Search (City/Area)"
+        nz-input
+        [(ngModel)]="locationInput"
+        (ngModelChange)="onSearchByLocation($event)"
+        [nzAutocomplete]="auto" />
+      <nz-autocomplete [nzDataSource]="filteredOptions()" nzBackfill #auto></nz-autocomplete>
+    </div>
+    <div class="w-80">
+      <p>Filter by Radius</p>
+      <nz-select class="w-full" [(ngModel)]="radiusSelect" nzAllowClear nzPlaceHolder="Select Radius">
+        @for (radius of radiusOptions(); track radius) {
+          <nz-option [nzValue]="radius" [nzLabel]="radius + ' KM'"></nz-option>
+        }
+      </nz-select>
+    </div>
+  </div>
+  <nz-table #basicTable [nzData]="filteredStudios()">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Location</th>
+        <th>Amenities</th>
+        <th>Price/hr</th>
+        <th>Rating</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (data of basicTable.data; track data.Id) {
+        <tr>
+          <td>{{ data.Name | notAvailable }}</td>
+          <td>{{ data.Type | notAvailable }}</td>
+          <td>
+            {{ data.Location.City }}<br />
+            {{ data.Location.Area }}<br />
+            {{ data.Location.Address }}
+          </td>
+
+          <td>{{ data.Amenities.join(', ') | notAvailable }}</td>
+          <td>{{ data.PricePerHour | notAvailable }}</td>
+          <td>{{ data.Rating | notAvailable }}</td>
+          <td>
+            <a class="whitespace-nowrap" (click)="bookStudio(data)">Book Now</a>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+</nz-spin>
